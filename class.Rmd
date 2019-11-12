@@ -1,0 +1,27 @@
+---
+title: "class"
+author: "George Guarnieri"
+date: "11/12/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(tidyverse)
+library(ggplot2)
+library(googlesheets4)
+library(lm)
+
+sheets_deauth()
+
+survey_data<-read_sheet("13NhlT-Oik5P4NOKRWwrJ7xZQlddFNk81HHEw9wkWglM")
+survey_data
+
+lm(data=survey_data, dvote~partisanship)
+
+ggplot(survey_data,aes(x=partisanship,y=dvote))+geom_jitter(height=0.1)+geom_smooth(method=lm)
+```
+
